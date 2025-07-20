@@ -2,7 +2,7 @@
 
 A complete behavioral authentication system built for hackathon demonstration, featuring dual backends and advanced gait pattern analysis.
 
-## 🎯 Project Overview
+## Project Overview
 
 **HashGait** combines behavioral biometrics with modern web technologies to create a unique authentication system based on user movement patterns, touch behaviors, and device sensor data.
 
@@ -14,7 +14,7 @@ A complete behavioral authentication system built for hackathon demonstration, f
 - **Live Dashboard** - Real-time monitoring and statistics
 - **Automatic Fallback** - Works with either backend independently
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 HashGaitApp/                 # React Native Frontend
