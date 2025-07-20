@@ -1,8 +1,8 @@
 import React from 'react';
-import { AuthenticationScreen } from './src/components/AuthenticationScreen';
+import { AppNavigator } from './src/navigation/AppNavigator';
 
 const App = () => {
-    return <AuthenticationScreen />;
+    return <AppNavigator />;
 };
 
 export default App;
