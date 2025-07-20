@@ -1,0 +1,20 @@
+{
+  "canisters": {
+    "behavioral_auth_canister": {
+      "type": "azle",
+      "main": "src/index.ts",
+      "declarations": {
+        "output": "../HashGaitApp/src/declarations/behavioral_auth_canister",
+        "node_compatibility": true
+      }
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

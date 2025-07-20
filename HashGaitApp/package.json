@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "react-native-sensors": "^7.3.6",
+    "@react-native-async-storage/async-storage": "^1.19.0",
+    "react-native-sqlite-storage": "^6.0.1",
+    "@dfinity/agent": "^2.1.2",
+    "@dfinity/principal": "^2.0.0",
+    "@dfinity/identity": "^2.1.2",
+    "@dfinity/auth-client": "^2.1.2",
+    "react-native-vector-icons": "^10.0.0",
+    "@react-navigation/native": "^6.1.0",
+    "@react-navigation/stack": "^6.3.0"
+  }
+}

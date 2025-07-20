@@ -1,0 +1,19 @@
+{
+  "name": "behavioral_auth_canister",
+  "version": "1.0.0",
+  "description": "ICP canister for behavioral authentication",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "azle behavioral_auth_canister",
+    "deploy": "dfx deploy",
+    "start": "dfx start --background",
+    "stop": "dfx stop",
+    "clean": "dfx start --clean --background"
+  },
+  "devDependencies": {
+    "azle": "^0.20.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
+}
