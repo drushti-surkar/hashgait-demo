@@ -7,12 +7,12 @@ A complete behavioral authentication system built for hackathon demonstration, f
 **HashGait** combines behavioral biometrics with modern web technologies to create a unique authentication system based on user movement patterns, touch behaviors, and device sensor data.
 
 ### Key Features
-- 🚶‍♂️ **Gait Pattern Analysis** - Motion sensor-based behavioral authentication
-- 🔐 **Dual Backend Architecture** - Node.js + ICP blockchain backends  
-- 📱 **React Native Frontend** - Modern mobile app with real-time sensors
-- 🎲 **SHA-256 Hashing** - Secure pattern generation and verification
-- 📊 **Live Dashboard** - Real-time monitoring and statistics
-- 🔄 **Automatic Fallback** - Works with either backend independently
+- **Gait Pattern Analysis** - Motion sensor-based behavioral authentication
+- **Dual Backend Architecture** - Node.js + ICP blockchain backends  
+- **React Native Frontend** - Modern mobile app with real-time sensors
+- **SHA-256 Hashing** - Secure pattern generation and verification
+- **Live Dashboard** - Real-time monitoring and statistics
+- **Automatic Fallback** - Works with either backend independently
 
 ## 🏗️ Architecture
 
@@ -34,7 +34,7 @@ icp_backend/               # Internet Computer Protocol Backend
 └── package.json          # ICP dependencies
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js (v16+)
@@ -64,7 +64,7 @@ npx expo start
 # Scan QR code with Expo Go app
 ```
 
-## 📱 User Journey
+## User Journey
 
 ### 1. Login Screen
 - Mock authentication with any username/password
@@ -128,7 +128,7 @@ const icpResult = await icpService.verifyBehavioralPattern(
 />
 ```
 
-## 🎨 UI/UX Features
+## UI/UX Features
 
 - **Modern Design System** - Clean cards, consistent spacing, intuitive navigation
 - **Real-time Feedback** - Progress bars, live sensor readings, status indicators
@@ -136,7 +136,7 @@ const icpResult = await icpService.verifyBehavioralPattern(
 - **Mobile Optimized** - Responsive design, touch-friendly interfaces
 - **Accessibility** - High contrast, clear typography, proper touch targets
 
-## 🔐 Security Features
+## Security Features
 
 - **Multi-modal Biometrics** - Combines touch behavior + motion sensors
 - **Pattern Hashing** - Behavioral data converted to secure hashes
@@ -144,9 +144,6 @@ const icpResult = await icpService.verifyBehavioralPattern(
 - **Session Isolation** - Unique session IDs prevent replay attacks
 - **Confidence Thresholds** - Configurable authentication sensitivity
 
-## 📊 Demo Capabilities
-
-Perfect for hackathon presentations:
 
 ### Technical Depth
 - Advanced behavioral analysis algorithms
@@ -166,7 +163,7 @@ Perfect for hackathon presentations:
 - Mobile-first responsive design
 - RESTful API architecture
 
-## 🧪 Testing
+## Testing
 
 ### Backend Testing
 ```bash
@@ -189,7 +186,7 @@ curl http://localhost:3000/history
 4. Explore dashboard features
 5. Test offline mode capabilities
 
-## 📁 File Structure
+## File Structure
 
 ```
 HashGait/
@@ -211,7 +208,7 @@ HashGait/
     └── README.md         # Frontend docs
 ```
 
-## 🚀 Deployment Options
+## Deployment Options
 
 ### Development
 - Node.js backend: `npm start` (localhost:3000)
@@ -222,29 +219,6 @@ HashGait/
 - **Backend**: Deploy to Heroku, Railway, AWS, DigitalOcean
 - **ICP**: Deploy to Internet Computer mainnet
 - **Frontend**: Build with `expo build` and deploy to app stores
-
-## 🤝 Hackathon Presentation Tips
-
-### Technical Demo Flow
-1. **Architecture Overview** - Show dual backend system
-2. **Live Gait Capture** - Demonstrate real sensor collection
-3. **Hash Generation** - Show SHA-256 output and history  
-4. **Behavioral Analysis** - Explain confidence scoring
-5. **Dashboard Tour** - Live sensor data and backend monitoring
-
-### Key Talking Points
-- **Innovation**: Behavioral biometrics for authentication
-- **Technical Complexity**: Real-time sensor processing + dual backends
-- **Practical Application**: Mobile security, IoT device authentication
-- **Scalability**: Blockchain + traditional backend architecture
-- **User Experience**: Seamless authentication without passwords
-
-### Demo Safety Tips
-- Test on physical device (sensors required)
-- Have backup demo data if sensors fail
-- Prepare network connectivity backups
-- Practice the 10-second capture timing
-- Show error handling and offline capabilities
 
 ## 📈 Future Enhancements
 
@@ -269,17 +243,5 @@ HashGait/
 - [ ] Code documentation and TypeScript improvements
 - [ ] Security audit and penetration testing
 
-## 🎯 Hackathon Success Criteria
 
-✅ **Complete System** - Full-stack application with frontend + dual backends
-✅ **Advanced Technology** - Behavioral biometrics, blockchain integration, real-time sensors  
-✅ **Professional UI** - Polished mobile interface with smooth UX
-✅ **Live Demo Ready** - Works reliably for live demonstration
-✅ **Technical Depth** - Complex algorithms, multiple technology integrations
-✅ **Practical Application** - Solves real authentication security problems
-
----
-
-**Built for Hackathon Excellence** 🏆
-
-*HashGait represents the perfect balance of technical innovation, practical application, and demo-ready polish for hackathon success.*
+*HashGait represents the perfect balance of technical innovation, practical application, and demo-ready polish.
