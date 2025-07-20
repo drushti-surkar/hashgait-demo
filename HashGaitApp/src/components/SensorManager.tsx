@@ -1,59 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { accelerometer, gyroscope } from 'react-native-sensors';
-import { Subscription } from 'rxjs';
-import { AccelerometerData, GyroscopeData } from '../types/SensorTypes';
+import { AccelerometerData, GyroscopeData } from '../types';
 
 interface SensorManagerProps {
-    onAccelerometerData: (data: AccelerometerData) => void;
-    onGyroscopeData: (data: GyroscopeData) => void;
-    isCollecting: boolean;
+  onAccelerometerData: (data: AccelerometerData) => void;
+  onGyroscopeData: (data: GyroscopeData) => void;
+  isCollecting: boolean;
 }
 
 export const SensorManager: React.FC<SensorManagerProps> = ({
-    onAccelerometerData,
-    onGyroscopeData,
-    isCollecting
+  onAccelerometerData,
+  onGyroscopeData,
+  isCollecting
 }) => {
-    const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
-    useEffect(() => {
-        if (isCollecting) {
-            startSensorCollection();
-        } else {
-            stopSensorCollection();
-        }
+  useEffect(() => {
+    if (isCollecting) {
+      // Start mock sensor data generation
+      const id = setInterval(() => {
+        const timestamp = Date.now();
+        
+        // Generate mock accelerometer data
+        const accelData: AccelerometerData = {
+          timestamp,
+          x: (Math.random() - 0.5) * 2, // -1 to 1
+          y: (Math.random() - 0.5) * 2,
+          z: (Math.random() - 0.5) * 2 + 9.8, // Include gravity
+        };
+        
+        // Generate mock gyroscope data
+        const gyroData: GyroscopeData = {
+          timestamp,
+          x: (Math.random() - 0.5) * 0.5, // -0.25 to 0.25
+          y: (Math.random() - 0.5) * 0.5,
+          z: (Math.random() - 0.5) * 0.5,
+        };
 
-        return () => stopSensorCollection();
-    }, [isCollecting]);
+        onAccelerometerData(accelData);
+        onGyroscopeData(gyroData);
+      }, 100); // 10Hz sampling rate
 
-    const startSensorCollection = () => {
-        const accelSub = accelerometer.subscribe(({ x, y, z, timestamp }) => {
-            const data: AccelerometerData = {
-                timestamp: timestamp || Date.now(),
-                x: parseFloat(x.toFixed(4)),
-                y: parseFloat(y.toFixed(4)),
-                z: parseFloat(z.toFixed(4))
-            };
-            onAccelerometerData(data);
-        });
+      setIntervalId(id);
+    } else {
+      if (intervalId) {
+        clearInterval(intervalId);
+        setIntervalId(null);
+      }
+    }
 
-        const gyroSub = gyroscope.subscribe(({ x, y, z, timestamp }) => {
-            const data: GyroscopeData = {
-                timestamp: timestamp || Date.now(),
-                x: parseFloat(x.toFixed(4)),
-                y: parseFloat(y.toFixed(4)),
-                z: parseFloat(z.toFixed(4))
-            };
-            onGyroscopeData(data);
-        });
-
-        setSubscriptions([accelSub, gyroSub]);
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
     };
+  }, [isCollecting, onAccelerometerData, onGyroscopeData]);
 
-    const stopSensorCollection = () => {
-        subscriptions.forEach(sub => sub.unsubscribe());
-        setSubscriptions([]);
-    };
-
-    return null;
+  // This is a service component, no UI needed
+  return null;
 };

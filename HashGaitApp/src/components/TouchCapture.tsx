@@ -1,65 +1,71 @@
 import React from 'react';
-import { View, PanResponder, GestureResponderEvent, PanResponderGestureState } from 'react-native';
-import { TouchEvent } from '../types/SensorTypes';
+import { View, PanResponder, ViewStyle } from 'react-native';
+import { TouchEvent } from '../types';
 
 interface TouchCaptureProps {
-    children: React.ReactNode;
-    onTouchEvent: (event: TouchEvent) => void;
-    isEnabled: boolean;
+  onTouchEvent: (event: TouchEvent) => void;
+  isEnabled: boolean;
+  children: React.ReactNode;
+  style?: ViewStyle;
 }
 
-export const TouchCapture: React.FC<TouchCaptureProps> = ({ 
-    children, 
-    onTouchEvent, 
-    isEnabled 
+export const TouchCapture: React.FC<TouchCaptureProps> = ({
+  onTouchEvent,
+  isEnabled,
+  children,
+  style
 }) => {
-    const touchStartTime = React.useRef<number>(0);
+  const panResponder = React.useMemo(() => PanResponder.create({
+    onStartShouldSetPanResponder: () => isEnabled,
+    onMoveShouldSetPanResponder: () => isEnabled,
 
-    const panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: () => isEnabled,
-        onMoveShouldSetPanResponder: () => isEnabled,
-        
-        onPanResponderGrant: (evt: GestureResponderEvent) => {
-            touchStartTime.current = Date.now();
-            const touchEvent: TouchEvent = {
-                timestamp: touchStartTime.current,
-                x: evt.nativeEvent.pageX,
-                y: evt.nativeEvent.pageY,
-                pressure: evt.nativeEvent.force || 0.5,
-                type: 'start'
-            };
-            onTouchEvent(touchEvent);
-        },
+    onPanResponderGrant: (evt) => {
+      if (!isEnabled) return;
+      
+      const { locationX: x, locationY: y } = evt.nativeEvent;
+      const touchEvent: TouchEvent = {
+        timestamp: Date.now(),
+        x: x || 0,
+        y: y || 0,
+        pressure: 0.5, // Mock pressure since it's not available in web
+        type: 'start'
+      };
+      onTouchEvent(touchEvent);
+    },
 
-        onPanResponderMove: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
-            const touchEvent: TouchEvent = {
-                timestamp: Date.now(),
-                x: evt.nativeEvent.pageX,
-                y: evt.nativeEvent.pageY,
-                pressure: evt.nativeEvent.force || 0.5,
-                type: 'move'
-            };
-            onTouchEvent(touchEvent);
-        },
+    onPanResponderMove: (evt) => {
+      if (!isEnabled) return;
+      
+      const { locationX: x, locationY: y } = evt.nativeEvent;
+      const touchEvent: TouchEvent = {
+        timestamp: Date.now(),
+        x: x || 0,
+        y: y || 0,
+        pressure: 0.5,
+        type: 'move'
+      };
+      onTouchEvent(touchEvent);
+    },
 
-        onPanResponderRelease: (evt: GestureResponderEvent) => {
-            const currentTime = Date.now();
-            const duration = currentTime - touchStartTime.current;
-            const touchEvent: TouchEvent = {
-                timestamp: currentTime,
-                x: evt.nativeEvent.pageX,
-                y: evt.nativeEvent.pageY,
-                pressure: evt.nativeEvent.force || 0.5,
-                type: 'end',
-                duration: duration
-            };
-            onTouchEvent(touchEvent);
-        }
-    });
+    onPanResponderRelease: (evt) => {
+      if (!isEnabled) return;
+      
+      const { locationX: x, locationY: y } = evt.nativeEvent;
+      const touchEvent: TouchEvent = {
+        timestamp: Date.now(),
+        x: x || 0,
+        y: y || 0,
+        pressure: 0,
+        type: 'end',
+        duration: 100 // Mock duration
+      };
+      onTouchEvent(touchEvent);
+    },
+  }), [isEnabled, onTouchEvent]);
 
-    return (
-        <View {...panResponder.panHandlers} style={{ flex: 1 }}>
-            {children}
-        </View>
-    );
+  return (
+    <View style={[{ flex: 1 }, style]} {...panResponder.panHandlers}>
+      {children}
+    </View>
+  );
 };
